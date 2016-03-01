@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#e53935"
+   >
+
+    <TextView
+        android:paddingTop="10dp"
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username : "
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        />
+    <EditText
+        android:paddingLeft="12dp"
+        android:id="@+id/edit_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email : "
+        android:textSize="16sp"
+        android:textColor="#ffffff"/>
+
+    <EditText
+        android:id="@+id/edit_email"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:inputType="textEmailAddress"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact No : "
+        android:textSize="16sp"
+        android:textColor="#ffffff"/>
+
+    <EditText
+        android:id="@+id/edit_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:textColor="#ffffff"
+        />
+
+    <TextView
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password : "
+        android:textSize="16sp"
+        android:textColor="#ffffff"/>
+
+    <EditText
+        android:id="@+id/edit_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:textColor="#ffffff"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/button_orig_sign_up"
+        android:onClick="onclick"
+
+       />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? "
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:id="@+id/already"
+        android:onClick="onclick"/>
+
+</LinearLayout>
+
