@@ -2,10 +2,13 @@ package com.example.android.idontknow;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.renderscript.Sampler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.MenuItem;
@@ -44,12 +47,15 @@ public class SignUp extends AppCompatActivity {
     private String email;
     private String contact;
     private ProgressDialog progressDialog;
+    private static SharedPreferences sharedPreferences;
+    private static String DbName = "LOGIN";
+   private Context mContext;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
-
+        mContext = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.signup_toolbar);
 
         if(toolbar!=null){
@@ -67,12 +73,28 @@ public class SignUp extends AppCompatActivity {
         edit_email = (EditText) findViewById(R.id.edit_email);
     }
 
+    private static SharedPreferences getvals(Context context){
+        return context.getSharedPreferences(DbName,Context.MODE_PRIVATE);
+    }
+    public static String getUsername(Context context){
+        return getvals(context).getString("Email", null);
+    }
+    public static String getKeyPass(Context context){
+        return getvals(context).getString("Password",null);
+    }
+    public static void setKeys(Context context,String email,String password){
+        SharedPreferences.Editor sharedPreferences =   getvals(context).edit();
+        sharedPreferences.putString("Email",email);
+        sharedPreferences.putString("Password",password);
+        sharedPreferences.commit();
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id==android.R.id.home)
             onBackPressed();
-
         return true;
     }
 
@@ -129,10 +151,10 @@ public class SignUp extends AppCompatActivity {
                 edit_username.setError("required");
             }
 
-            if (email.isEmpty() || !email.matches(pattern)) {
+            else if (email.isEmpty() || !email.matches(pattern)) {
                 edit_email.setError("Email not valid");
             }
-            if (password.isEmpty() || (password.length()<5)) {
+            else if (password.isEmpty() || (password.length()<5)) {
                 edit_pass.setError("atleast 5 characters");
             } else {
                 progressDialog = new ProgressDialog(this);

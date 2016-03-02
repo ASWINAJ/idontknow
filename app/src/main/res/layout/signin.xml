@@ -58,12 +58,31 @@
         android:textSize="16sp"
         android:inputType="textPassword"
         android:textColor="#ffffff"/>
+
+    <CheckBox
+        android:text="Remember Me"
+        android:textSize="16sp"
+        android:id="@+id/signin_check"
+        android:onClick="Click"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/button_orig_sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="sign_in"
         android:onClick="Click"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LOG OUT"
+        android:id="@+id/logout"
+        android:onClick="Click"
+        />
 
     <TextView
         android:id="@+id/text_create"

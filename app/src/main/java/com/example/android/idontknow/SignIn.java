@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +34,7 @@ public class SignIn extends AppCompatActivity {
     private String email;
     private String password;
     private ProgressDialog progressDialog;
+    private CheckBox signin_check;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +49,21 @@ public class SignIn extends AppCompatActivity {
             getSupportActionBar().setElevation(0);
         }
 
-
         edit_email = (EditText)findViewById(R.id.edit_email);
         edit_password = (EditText)findViewById(R.id.edit_pass);
+        signin_check = (CheckBox)findViewById(R.id.signin_check);
+
+        if(SignUp.getKeyPass(this)!=null && SignUp.getUsername(this)!=null) {
+            edit_email.setText(SignUp.getUsername(this));
+            edit_password.setText(SignUp.getKeyPass(this));
+        }
+
+      //  Toast.makeText(SignIn.this, SignUp.getKeyPass(this), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(SignIn.this, SignUp.getUsername(this), Toast.LENGTH_SHORT).show();
+
+
+
+
 
 
     }
@@ -64,8 +78,6 @@ public class SignIn extends AppCompatActivity {
 
     public void login()
     {
-        email = edit_email.getText().toString();
-        password = edit_password.getText().toString();
         StringRequest request = new StringRequest(Request.Method.POST,url,
         new Response.Listener<String>() {
             @Override
@@ -106,6 +118,9 @@ public class SignIn extends AppCompatActivity {
 
     public void Click(View v){
 
+        email = edit_email.getText().toString();
+        password = edit_password.getText().toString();
+
         if(v.getId()==R.id.text_create){
             Intent i = new Intent(SignIn.this,SignUp.class);
             startActivity(i);
@@ -125,6 +140,15 @@ public class SignIn extends AppCompatActivity {
                 }
             }, 2000);
 
+        }
+        else if(v.getId() == R.id.signin_check){
+            SignUp.setKeys(this,email,password);
+           // Toast.makeText(SignIn.this,email + password ,Toast.LENGTH_SHORT).show();
+
+        }else if(v.getId()==R.id.logout){
+            edit_email.setText(null);
+            edit_password.setText(null);
+            SignUp.setKeys(this, null, null);
         }
     }
 }

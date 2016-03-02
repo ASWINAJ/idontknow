@@ -41,12 +41,12 @@ public class User extends AppCompatActivity {
     public void onclick(View v)
     {
         if(v.getId()==R.id.button_sign_in){
-            Toast.makeText(User.this,"signin",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(User.this,"signin",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(User.this,SignIn.class);
             startActivity(i);
         }
         else if(v.getId()==R.id.button_sign_up){
-            Toast.makeText(User.this,"signup",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(User.this,"signup",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(User.this,SignUp.class);
             startActivity(i);
         }
