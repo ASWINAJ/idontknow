@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
@@ -47,11 +49,31 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.signup_toolbar);
+
+        if(toolbar!=null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setElevation(0);
+        }
+
         sign_up = (Button) findViewById(R.id.button_orig_sign_up);
         edit_username = (EditText) findViewById(R.id.edit_username);
         edit_contact = (EditText) findViewById(R.id.edit_contact);
         edit_pass = (EditText) findViewById(R.id.edit_pass);
         edit_email = (EditText) findViewById(R.id.edit_email);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id==android.R.id.home)
+            onBackPressed();
+
+        return true;
     }
 
     public void register() {

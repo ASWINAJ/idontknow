@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.support.v7.widget.Toolbar;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -23,9 +24,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by aswin on 29/2/16.
- */
+
 public class SignIn extends AppCompatActivity {
     private static final String url = "http://athena.nitc.ac.in/aswin_b130736cs/getone.php";
     private EditText edit_email;
@@ -38,10 +37,29 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.signin_toolbar);
+        if(toolbar!=null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setElevation(0);
+        }
+
+
         edit_email = (EditText)findViewById(R.id.edit_email);
         edit_password = (EditText)findViewById(R.id.edit_pass);
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id==android.R.id.home)
+            onBackPressed();
+        return true;
     }
 
     public void login()

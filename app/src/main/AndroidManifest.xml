@@ -22,7 +22,8 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".User"
-         android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Muffin Lady">
         </activity>
         <activity android:name=".SignUp"
             android:label="@string/sign_up"
