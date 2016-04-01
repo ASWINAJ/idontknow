@@ -3,21 +3,27 @@ package com.example.android.idontknow;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -34,45 +40,52 @@ public class SignIn extends AppCompatActivity {
     private String email;
     private String password;
     private ProgressDialog progressDialog;
-    private CheckBox signin_check;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLUE);
+        }
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.signin_toolbar);
         if(toolbar!=null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setElevation(0);
+            //getSupportActionBar().setHomeButtonEnabled(true);
+            //getSupportActionBar().setDisplayShowHomeEnabled(true);
+           // getSupportActionBar().setElevation(0);
         }
 
         edit_email = (EditText)findViewById(R.id.edit_email);
         edit_password = (EditText)findViewById(R.id.edit_pass);
-        signin_check = (CheckBox)findViewById(R.id.signin_check);
+        button_orig_sign_in = (Button)findViewById(R.id.button_orig_sign_in);
 
-        if(SignUp.getKeyPass(this)!=null && SignUp.getUsername(this)!=null) {
-            edit_email.setText(SignUp.getUsername(this));
-            edit_password.setText(SignUp.getKeyPass(this));
-        }
 
       //  Toast.makeText(SignIn.this, SignUp.getKeyPass(this), Toast.LENGTH_SHORT).show();
       //  Toast.makeText(SignIn.this, SignUp.getUsername(this), Toast.LENGTH_SHORT).show();
 
 
+    }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(SignIn.this,User.class);
+        startActivity(i);
+        finish();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id==android.R.id.home)
+        if(id==android.R.id.home) {
+            finish();
             onBackPressed();
+        }
         return true;
     }
 
@@ -82,17 +95,28 @@ public class SignIn extends AppCompatActivity {
         new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.trim().equals("success")){
-                    Toast.makeText(SignIn.this,"Successfully entered",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                if (response.trim().equals("success")) {
+                        SignUp.setKeys(SignIn.this, email, password);
+
+                    Toast.makeText(SignIn.this, "Successfully entered", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(SignIn.this,Initial.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    Toast.makeText(SignIn.this, "Incorrect Username or Password", Toast.LENGTH_SHORT).show();
+                    edit_email.setText(null);
+                    edit_password.setText(null);
+
+
                 }
-                else
-                    Toast.makeText(SignIn.this,"Incorrect Username or Password",Toast.LENGTH_SHORT).show();
             }
         },
         new Response.ErrorListener() {
             String err;
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 if(error instanceof NoConnectionError) {
                     err = "No internet Access, Check your internet connection.";
                     Toast.makeText(SignIn.this,err,Toast.LENGTH_SHORT).show();
@@ -112,6 +136,10 @@ public class SignIn extends AppCompatActivity {
             }
         };
 
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
     }
@@ -121,34 +149,35 @@ public class SignIn extends AppCompatActivity {
         email = edit_email.getText().toString();
         password = edit_password.getText().toString();
 
-        if(v.getId()==R.id.text_create){
+         if(v.getId()==R.id.text_create){
             Intent i = new Intent(SignIn.this,SignUp.class);
             startActivity(i);
-        }else if(v.getId()==R.id.button_orig_sign_in){
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setIndeterminate(true);
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage("Authenticating...");
-            progressDialog.show();
+             finish();
+        }else if(v.getId()==R.id.button_orig_sign_in) {
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    progressDialog.dismiss();
-                    login();
+             if (email.isEmpty())
+                 edit_email.setError("Required");
+             else if (password.isEmpty())
+                 edit_password.setError("Required");
+             else {
 
-                }
-            }, 2000);
+                 progressDialog = new ProgressDialog(this);
+                 progressDialog.setIndeterminate(true);
+                 progressDialog.setCancelable(false);
+                 progressDialog.setMessage("Authenticating...");
+                 progressDialog.show();
 
-        }
-        else if(v.getId() == R.id.signin_check){
-            SignUp.setKeys(this,email,password);
-           // Toast.makeText(SignIn.this,email + password ,Toast.LENGTH_SHORT).show();
+                 new Handler().postDelayed(new Runnable() {
+                     @Override
+                     public void run() {
+                         login();
 
-        }else if(v.getId()==R.id.logout){
-            edit_email.setText(null);
-            edit_password.setText(null);
-            SignUp.setKeys(this, null, null);
-        }
+
+                     }
+                 }, 3000);
+
+             }
+         }
+
     }
 }

@@ -4,6 +4,25 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Legals"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/action_help_center"
+        android:orderInCategory="200"
+        android:title="Help Center"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/action_rate"
+        android:orderInCategory="300"
+        android:title="Rate this app"
+        app:showAsAction="never"
+        />
+
+
+
+
 </menu>

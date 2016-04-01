@@ -1,11 +1,15 @@
 package com.example.android.idontknow;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -18,6 +22,13 @@ public class User extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLUE);
+        }
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.open_toolbar);
         setSupportActionBar(toolbar);
 
@@ -31,10 +42,12 @@ public class User extends AppCompatActivity {
     public void onBackPressed() {
         pressed++;
 
-        Toast.makeText(User.this,"Press again if you want to exit",Toast.LENGTH_SHORT).show();
-
-        if(pressed>1)
+        if(pressed>1) {
             super.onBackPressed();
+            finish();
+        }
+        else
+            Toast.makeText(User.this,"Press again if you want to exit",Toast.LENGTH_SHORT).show();
 
     }
 
@@ -44,11 +57,13 @@ public class User extends AppCompatActivity {
             //Toast.makeText(User.this,"signin",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(User.this,SignIn.class);
             startActivity(i);
+            finish();
         }
         else if(v.getId()==R.id.button_sign_up){
             //Toast.makeText(User.this,"signup",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(User.this,SignUp.class);
             startActivity(i);
+            finish();
         }
     }
 

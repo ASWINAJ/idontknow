@@ -21,6 +21,22 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity android:name=".Cakes_list"
+                  android:label="Cakes"
+                  android:theme = "@style/AppTheme.NoActionBar"
+            ></activity>
+
+        <activity android:name=".Muffin_list"
+            android:label="Muffins"
+            android:theme = "@style/AppTheme.NoActionBar"
+            ></activity>
+
+        <activity android:name=".Party_list"
+            android:label="Party Time"
+            android:theme = "@style/AppTheme.NoActionBar"
+            ></activity>
+
         <activity android:name=".User"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="Muffin Lady">
@@ -33,6 +49,16 @@
             android:label="@string/sign_in"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
+        <activity android:name=".Initial"
+            android:label="MuffinLady"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name=".Wedding_cake"
+            android:label="Items"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
