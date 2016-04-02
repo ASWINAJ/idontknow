@@ -3,6 +3,7 @@
     package="com.example.android.idontknow">
 
     <application
+        android:name=".AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -58,7 +59,21 @@
 
         <activity android:name=".Wedding_cake"
             android:label="Items"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+
+        </activity>
+
+        <activity android:name=".Main_item"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Main_item"
+            >
+
+        </activity>
+        <activity android:name=".Nointernet"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="No Internet"
+            ></activity>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

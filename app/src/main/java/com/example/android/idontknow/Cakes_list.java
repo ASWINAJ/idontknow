@@ -1,8 +1,11 @@
 package com.example.android.idontknow;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +24,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.URL;
 
 
 /**
@@ -117,7 +127,7 @@ public class Cakes_list extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main,menu);
+        inflater.inflate(R.menu.main, menu);
         return true;
     }
 
@@ -151,8 +161,16 @@ public class Cakes_list extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public void onAnimationEnd(Animation animation) {
 
+        String a;
+        boolean bool = isNetworkAvailable();
+        if(bool == true)
+            a = "true";
+        else
+            a= "false";
+
+
         if(animation.equals(animation_1)) {
-            Toast.makeText(Cakes_list.this, "this is the wedding", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Cakes_list.this, "this is the wedding" + a, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(Cakes_list.this,Wedding_cake.class);
             startActivity(i);
         }
@@ -167,6 +185,15 @@ public class Cakes_list extends AppCompatActivity implements NavigationView.OnNa
         }
 
     }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
 
     @Override
     public void onAnimationRepeat(Animation animation) {

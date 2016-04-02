@@ -1,9 +1,11 @@
 package com.example.android.idontknow;
 
+import java.io.Serializable;
+
 /**
  * Created by aswin on 1/4/16.
  */
-public class Item {
+public class Item implements Serializable {
     private String itemname;
     private String thumbnailUrl;
 

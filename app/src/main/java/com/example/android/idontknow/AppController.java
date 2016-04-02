@@ -2,14 +2,16 @@ package com.example.android.idontknow;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+
 /**
- * Created by aswin on 1/4/16.
+ * Created by aswin on 6/3/16.
  */
 public class AppController extends Application {
     public static final String TAG = AppController.class.getSimpleName();
@@ -29,7 +31,7 @@ public class AppController extends Application {
 
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+            mRequestQueue = Volley.newRequestQueue(this);
         }
 
         return mRequestQueue;
@@ -60,4 +62,6 @@ public class AppController extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
+
 }
+

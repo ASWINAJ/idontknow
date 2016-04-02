@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -24,6 +25,8 @@ public class CustomListAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private ArrayList<Item> Itemlist;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+
+
 
     public CustomListAdapter(Activity activity, ArrayList<Item> Itemlist) {
         this.activity = activity;
@@ -69,6 +72,7 @@ public class CustomListAdapter extends BaseAdapter{
 
         // title
         itemname.setText(m.getItemname());
+
 
         return convertView;
 
