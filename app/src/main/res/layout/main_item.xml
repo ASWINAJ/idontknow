@@ -1,14 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <HorizontalScrollView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/hsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:measureAllChildren="false"
+        android:scrollbars="none"
+        android:fadingEdgeLength="20dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     <com.android.volley.toolbox.NetworkImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/main_image"
+        android:id="@+id/main_image_1"
         android:adjustViewBounds="true"
         android:fitsSystemWindows="true"
-        android:scaleType="center"/>
+        android:scaleType="center"
+        android:layout_margin="10dp"/>
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#9e9e9e"
+            android:layout_margin="10dp"
+            ></View>
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_image_2"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="center"
+            android:layout_margin="10dp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#9e9e9e"
+            android:layout_margin="10dp"
+            ></View>
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_image_3"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="center"
+            android:layout_margin="10dp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#9e9e9e"
+            android:layout_margin="10dp"
+            ></View>
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_image_4"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="center"
+            android:layout_margin="10dp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#9e9e9e"
+            android:layout_margin="10dp"
+            ></View>
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_image_5"
+            android:adjustViewBounds="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="center"/>
+
+    </LinearLayout>
+    </HorizontalScrollView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price : "
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pricetag"
+        android:text="Rs.400.00"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        />
+    </LinearLayout>
+
+    <Button
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buy"
+        android:text= "BUY"
+        android:textSize="25sp"
+        android:layout_gravity="center"/>
 </LinearLayout>

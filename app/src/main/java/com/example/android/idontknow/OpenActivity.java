@@ -2,15 +2,19 @@ package com.example.android.idontknow;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -41,6 +45,7 @@ public class OpenActivity extends AppCompatActivity implements Animation.Animati
         imageView.setVisibility(View.VISIBLE);
         imageView.startAnimation(myFadeInAnimation);
         myFadeInAnimation.setAnimationListener(this);
+
 
 
     }

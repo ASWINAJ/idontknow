@@ -26,7 +26,13 @@ import java.io.Serializable;
  */
 public class Main_item extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Serializable {
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-    private NetworkImageView networkImageView;
+    private NetworkImageView networkImageView1;
+    private NetworkImageView networkImageView2;
+    private NetworkImageView networkImageView3;
+    private NetworkImageView networkImageView4;
+    private NetworkImageView networkImageView5;
+
+
 
     private DrawerLayout drawerLayout;
     @Override
@@ -35,14 +41,22 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.main_item_initial);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
-        networkImageView = (NetworkImageView)findViewById(R.id.main_image);
+        networkImageView1 = (NetworkImageView)findViewById(R.id.main_image_1);
+        networkImageView2 = (NetworkImageView)findViewById(R.id.main_image_2);
+        networkImageView3 = (NetworkImageView)findViewById(R.id.main_image_3);
+        networkImageView4 = (NetworkImageView)findViewById(R.id.main_image_4);
+        networkImageView5 = (NetworkImageView)findViewById(R.id.main_image_5);
 
         Intent i = getIntent();
 
          Item item = (Item)i.getExtras().getSerializable("MyClass");
         Toast.makeText(Main_item.this,"asee "+item.getItemname(),Toast.LENGTH_SHORT).show();
 
-       networkImageView.setImageUrl(item.getThumbnailUrl(),imageLoader);
+       networkImageView1.setImageUrl(item.getThumbnailUrl1(), imageLoader);
+        networkImageView2.setImageUrl(item.getThumbnailUrl1(),imageLoader);
+        networkImageView3.setImageUrl(item.getThumbnailUrl1(),imageLoader);
+        networkImageView4.setImageUrl(item.getThumbnailUrl1(),imageLoader);
+        networkImageView5.setImageUrl(item.getThumbnailUrl1(),imageLoader);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -15,6 +15,7 @@ import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,9 +28,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
@@ -47,7 +50,7 @@ import java.util.List;
 /**
  * Created by aswin on 31/3/16.
  */
-public class Wedding_cake extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Serializable {
+public class Wedding_cake extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Serializable,SwipeRefreshLayout.OnRefreshListener {
 
     private Boolean aBoolean=false;
     private DrawerLayout drawerLayout;
@@ -57,6 +60,7 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
     private GridView listView;
     private CustomListAdapter adapter;
     private ProgressDialog progressDialog;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -66,9 +70,28 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.wedding_cake_initial);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading...");
+
         listView = (GridView) findViewById(R.id.list);
         adapter = new CustomListAdapter(this, Itemlist);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        Itemlist.clear();
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        swipeRefreshLayout.setRefreshing(true);
+
+                                        action();
+                                    }
+                                }
+        );
 
 
 
@@ -94,56 +117,7 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
-
-        Toast.makeText(Wedding_cake.this,"im in action",Toast.LENGTH_SHORT).show();
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        JsonArrayRequest itemreq =new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for(int i=0;i< response.length();i++){
-                            try {
-                                JSONObject obj = response.getJSONObject(i);
-                                Item item = new Item();
-                                item.setItemname(obj.getString("title"));
-                                item.setThumbnailUrl(obj.getString("image"));
-
-                                Itemlist.add(item);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        progressDialog.dismiss();
-                        listView.setAdapter(adapter);
-                    }
-
-                },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String err;
-                progressDialog.dismiss();
-                if(error instanceof NoConnectionError) {
-                    err = "No internet Access, Check your internet connection.";
-                    Toast.makeText(Wedding_cake.this,err,Toast.LENGTH_SHORT).show();
-
-                }
-                else
-                    Toast.makeText(Wedding_cake.this,error.toString(),Toast.LENGTH_SHORT).show();
-
-                Intent i = new Intent(Wedding_cake.this,Nointernet.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
-        AppController.getInstance().addToRequestQueue(itemreq);
+        action();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -161,7 +135,66 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void action(){
+        swipeRefreshLayout.setRefreshing(true);
+        progressDialog.show();
 
+
+        Toast.makeText(Wedding_cake.this,"im in action",Toast.LENGTH_SHORT).show();
+
+        JsonArrayRequest itemreq =new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Itemlist.clear();
+                        //progressDialog.dismiss();
+                        for(int i=0;i< response.length();i++){
+                            try {
+                                JSONObject obj = response.getJSONObject(i);
+                                Item item = new Item();
+                                item.setItemname(obj.getString("title"));
+                                item.setThumbnailUrl(obj.getString("image"));
+                                item.setThumbnailUrl1(obj.getString("sub"));
+
+                                Itemlist.add(item);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        listView.setAdapter(adapter);
+                        swipeRefreshLayout.setRefreshing(false);
+                        progressDialog.dismiss();
+                    }
+
+                },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String err;
+                progressDialog.dismiss();
+                swipeRefreshLayout.setRefreshing(false);
+                if(error instanceof NoConnectionError) {
+
+                    err = "No internet Access, Check your internet connection.";
+                    Toast.makeText(Wedding_cake.this,err,Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                    Toast.makeText(Wedding_cake.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(Wedding_cake.this,Nointernet.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        int socketTimeout = 3000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, 0, 0);
+        itemreq.setRetryPolicy(policy);
+
+        AppController.getInstance().addToRequestQueue(itemreq);
+
+    }
 
 
 
@@ -188,5 +221,11 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
         Toast.makeText(Wedding_cake.this,item.getTitle(),Toast.LENGTH_SHORT).show();
 
         return true;
+    }
+
+    @Override
+    public void onRefresh() {
+        Itemlist.clear();
+        action();
     }
 }
