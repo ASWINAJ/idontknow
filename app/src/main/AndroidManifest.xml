@@ -44,10 +44,12 @@
         </activity>
         <activity android:name=".SignUp"
             android:label="@string/sign_up"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".SignIn"
             android:label="@string/sign_in"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
@@ -67,6 +69,8 @@
         <activity android:name=".Main_item"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="Main_item"
+            android:windowSoftInputMode="adjustPan" >
+
             >
 
         </activity>

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    >
+    <ScrollView
+        android:layout_marginBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
 
     <HorizontalScrollView
@@ -95,38 +103,153 @@
 
     </LinearLayout>
     </HorizontalScrollView>
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Price : "
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pricetag"
-        android:text="Rs.400.00"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        />
-    </LinearLayout>
-
-    <Button
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buy"
-        android:text= "BUY"
-        android:textSize="25sp"
-        android:layout_gravity="center"/>
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MRP : \n250.00"
+        android:textSize="20sp"
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            ></View>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:gravity="center">
+
+        <RatingBar
+            android:progressTint="#ffc107"
+            android:rating="3.5"
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            style="?android:attr/ratingBarStyleSmall"
+            android:numStars="5"
+            android:stepSize="0.1"
+            android:isIndicator="true" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 Ratings"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="In Stock"
+        android:textColor="@color/light_green"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Usually  Delivered in 2-3 Business days \nFaster Delivery Options may be available"/>
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Check Availability"
+         android:textSize="16sp"
+         android:textStyle="bold"
+         android:layout_marginTop="10dp"
+         android:layout_marginLeft="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+        <EditText
+            android:id="@+id/pincode"
+            android:padding="8dp"
+            android:background="@drawable/rectangle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Pincode"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="2"/>
+            <Button
+                android:onClick="click_check_avail"
+                android:id="@+id/check_availability"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check"
+                android:textSize="16sp"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Best Before 10 days from the date of purchase"
+        android:layout_margin="10dp"
+        android:textSize="16sp"/>
+
+
+
+
 </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-5dp">
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to cart"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="-8dp"
+        android:textSize="20sp"
+        android:id="@+id/add_to_cart"
+        android:layout_weight="2"
+        android:onClick="click_check_avail"/>
+
+
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/buy_button"
+        android:layout_marginLeft="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BUY"
+        android:textSize="20sp"
+        android:onClick="click_check_avail"/>
+    </LinearLayout>
+</RelativeLayout>
