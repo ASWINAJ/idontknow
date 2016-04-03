@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e53935"
 >
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,42 +24,53 @@
 
 </android.support.v7.widget.Toolbar>
 
-<TextView
-    android:paddingLeft="15dp"
-    android:id="@+id/text_email"
-    android:paddingTop="20dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Emial"
-    android:textSize="18sp"
-    android:textColor="#ffffff"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp">
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_signin_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#880e4f"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        >
 
     <EditText
-        android:layout_marginLeft="15dp"
+        android:hint="Username"
         android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="#ffffff"/>
+        />
+    </android.support.design.widget.TextInputLayout>
 
-<TextView
-    android:paddingLeft="15dp"
-    android:id="@+id/text_pass"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Password"
-    android:textSize="18sp"
-    android:textColor="#ffffff"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_signin_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#880e4f"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        >
 
     <EditText
-        android:layout_marginLeft="15dp"
+        android:hint="Password"
         android:id="@+id/edit_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:inputType="textPassword"
-        android:textColor="#ffffff"/>
-
+        />
+    </android.support.design.widget.TextInputLayout>
 
 
     <Button
@@ -72,18 +82,18 @@
 
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/text_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create account ?"
         android:clickable="true"
-        android:textColor="#ffffff"
         android:layout_gravity="center_horizontal"
         android:textSize="20sp"
         android:onClick="Click"/>
 
     </LinearLayout>
-
+</LinearLayout>
 </ScrollView>
 
 

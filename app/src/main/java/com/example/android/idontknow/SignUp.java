@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.renderscript.Sampler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.MenuItem;
@@ -52,13 +53,19 @@ public class SignUp extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private static SharedPreferences sharedPreferences;
     private static String DbName = "LOGIN";
-   private Context mContext;
-
+    private Context mContext;
+    private TextInputLayout layout_signup_usename;
+    private TextInputLayout layout_signup_email;
+    private TextInputLayout layout_signup_password;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
         mContext = this;
+
+        layout_signup_usename = (TextInputLayout)findViewById(R.id.layout_signup_username);
+        layout_signup_email = (TextInputLayout) findViewById(R.id.layout_signup_email);
+        layout_signup_password = (TextInputLayout)findViewById(R.id.layout_signup_password);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -169,6 +176,9 @@ public class SignUp extends AppCompatActivity {
 
 
     public void onclick(View v) {
+
+        int a,b,c;
+        a=b=c=0;
         if (v.getId() == R.id.button_orig_sign_up) {
 
             username = edit_username.getText().toString();
@@ -177,15 +187,30 @@ public class SignUp extends AppCompatActivity {
             String pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
             if (username.isEmpty()) {
-                edit_username.setError("required");
+                layout_signup_usename.setError("required");
+                a=0;
+            }
+            else {
+                layout_signup_usename.setErrorEnabled(false);
+                a=1;
             }
 
-            else if (email.isEmpty() || !email.matches(pattern)) {
-                edit_email.setError("Email not valid");
+            if (email.isEmpty() || !email.matches(pattern)) {
+                layout_signup_email.setError("Email not valid");
+                b=0;
             }
-            else if (password.isEmpty() || (password.length()<5)) {
-                edit_pass.setError("atleast 5 characters");
-            } else {
+            else {
+                layout_signup_email.setErrorEnabled(false);
+                b=1;
+            }
+            if (password.isEmpty() || (password.length()<5)) {
+                layout_signup_password.setError("atleast 5 characters");
+                c=0;
+            }else {
+                layout_signup_password.setErrorEnabled(false);
+                c=1;
+            }
+            if(a==1 && b==1 && c==1) {
                 progressDialog = new ProgressDialog(this);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setCancelable(false);

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +41,8 @@ public class SignIn extends AppCompatActivity {
     private String email;
     private String password;
     private ProgressDialog progressDialog;
+    private TextInputLayout layout_signin_username;
+    private TextInputLayout layout_signin_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,8 @@ public class SignIn extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.BLUE);
         }
-
+        layout_signin_username = (TextInputLayout)findViewById(R.id.layout_signin_username);
+        layout_signin_password = (TextInputLayout) findViewById(R.id.layout_signin_password);
         Toolbar toolbar = (Toolbar)findViewById(R.id.signin_toolbar);
         if(toolbar!=null) {
             setSupportActionBar(toolbar);
@@ -144,6 +148,7 @@ public class SignIn extends AppCompatActivity {
         requestQueue.add(request);
     }
 
+
     public void Click(View v){
 
         email = edit_email.getText().toString();
@@ -155,12 +160,19 @@ public class SignIn extends AppCompatActivity {
              finish();
         }else if(v.getId()==R.id.button_orig_sign_in) {
 
-             if (email.isEmpty())
-                 edit_email.setError("Required");
-             else if (password.isEmpty())
-                 edit_password.setError("Required");
-             else {
+             if (email.isEmpty()) {
+                 layout_signin_username.setError("Required");
+             }
+             else if(!email.isEmpty())
+                 layout_signin_username.setErrorEnabled(false);
 
+             if (password.isEmpty()) {
+                 layout_signin_password.setError("Required");
+             }
+             else if(!password.isEmpty())
+                 layout_signin_password.setErrorEnabled(false);
+
+             if(!email.isEmpty() && !password.isEmpty()){
                  progressDialog = new ProgressDialog(this);
                  progressDialog.setIndeterminate(true);
                  progressDialog.setCancelable(false);

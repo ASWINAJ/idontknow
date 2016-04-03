@@ -171,9 +171,12 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
                 Toast.makeText(Main_item.this,"Enter your pin",Toast.LENGTH_SHORT).show();
             else if(avail==0)
                 Toast.makeText(Main_item.this,"Try with another locality",Toast.LENGTH_SHORT).show();
-            else if(avail==1)
-                Toast.makeText(Main_item.this,"Yeah baby now u can buy",Toast.LENGTH_SHORT).show();
+            else if(avail==1) {
+                Toast.makeText(Main_item.this, "Yeah baby now u can buy", Toast.LENGTH_SHORT).show();
+                    Intent i =new Intent(Main_item.this,Delivery.class);
+                    startActivity(i);
 
+            }
         }
 
     }

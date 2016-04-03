@@ -79,6 +79,11 @@
             android:label="No Internet"
             ></activity>
 
+        <activity android:name=".Delivery"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Delivery Details"
+            android:windowSoftInputMode="adjustPan"></activity>
+
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
