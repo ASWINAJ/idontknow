@@ -182,6 +182,7 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
                             try {
                                 JSONObject obj = response.getJSONObject(i);
                                 Item item = new Item();
+                                item.setItemid(obj.getString("itemno"));
                                 item.setItemname(obj.getString("title"));
                                 item.setThumbnailUrl(obj.getString("image"));
                                 item.setThumbnailUrl1(obj.getString("sub"));

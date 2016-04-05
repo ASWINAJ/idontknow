@@ -42,6 +42,7 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
     private EditText pincode;
     private int pin;
     private int avail=-1;
+    private Item item;
 
 
 
@@ -68,7 +69,7 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
 
         Intent i = getIntent();
 
-         Item item = (Item)i.getExtras().getSerializable("MyClass");
+        item = (Item)i.getExtras().getSerializable("MyClass");
         Toast.makeText(Main_item.this,"asee "+item.getItemname(),Toast.LENGTH_SHORT).show();
 
        networkImageView1.setImageUrl(item.getThumbnailUrl1(), imageLoader);
@@ -119,6 +120,13 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_history)
+        {
+            Intent i = new Intent(Main_item.this,History.class);
+            startActivity(i);
+        }
+
         return true;
     }
 
@@ -174,6 +182,7 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
             else if(avail==1) {
                 Toast.makeText(Main_item.this, "Yeah baby now u can buy", Toast.LENGTH_SHORT).show();
                     Intent i =new Intent(Main_item.this,Delivery.class);
+                    i.putExtra("MyClass", (Serializable) item);
                     startActivity(i);
 
             }

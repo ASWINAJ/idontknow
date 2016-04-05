@@ -3,61 +3,61 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="#4527a0"
-   >
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="start"
-    android:layout_margin="10dp"
     >
 
-    <ImageButton
 
-        android:id="@+id/cakes_button"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:src="@drawable/rsz_3large_3tieredbirthdaycake"
-        android:background="@drawable/rounded_corner"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="?android:actionBarSize"
-        android:layout_gravity="center"
-        android:onClick="click"
-
-    />
-
-    <ImageButton
-
-        android:id="@+id/muffins_button"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:src="@drawable/rsz_muffins"
-        android:background="@drawable/rounded_corner"
-        android:padding="5dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="start"
         android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:onClick="click"
-        />
+        >
 
-    <ImageButton
+        <ImageButton
 
-        android:id="@+id/party_button"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:src="@drawable/rsz_large"
-        android:background="@drawable/rounded_corner"
-        android:padding="5dp"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:onClick="click"
-        />
+            android:id="@+id/cakes_button"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:src="@drawable/rsz_3large_3tieredbirthdaycake"
+            android:background="@drawable/rounded_corner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="?android:actionBarSize"
+            android:layout_gravity="center"
+            android:onClick="click"
+
+            />
+
+        <ImageButton
+
+            android:id="@+id/muffins_button"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:src="@drawable/rsz_muffins"
+            android:background="@drawable/rounded_corner"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="click"
+            />
+
+        <ImageButton
+
+            android:id="@+id/party_button"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:src="@drawable/rsz_large"
+            android:background="@drawable/rounded_corner"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="click"
+            />
 
 
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
 

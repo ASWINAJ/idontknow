@@ -83,6 +83,15 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:label="Delivery Details"
             android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".Sure"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Sure?"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity android:name=".History"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Its history honey"
+            android:windowSoftInputMode="adjustPan"/>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

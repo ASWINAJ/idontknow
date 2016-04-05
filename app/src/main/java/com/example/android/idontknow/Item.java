@@ -6,12 +6,21 @@ import java.io.Serializable;
  * Created by aswin on 1/4/16.
  */
 public class Item implements Serializable {
+    private String itemid;
     private String itemname;
     private String thumbnailUrl;
     private String thumbnailUrl1;
 
     public Item(){
 
+    }
+
+    public String getItemid(){
+        return itemid;
+    }
+
+    public void setItemid(String itemid){
+        this.itemid = itemid;
     }
 
     public String getThumbnailUrl1() {

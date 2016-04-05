@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:local="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:id="@+id/sure_toolbar"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        local:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:fitsSystemWindows="true"
+        android:id="@+id/sure_image"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="ItemName"
+        android:textColor="#ffc107"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sure_item_name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Amount"
+            android:textColor="#ffc107"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:id="@+id/sure_kilos"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Price"
+            android:textColor="#ffc107"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sure_price"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Name"
+            android:textColor="#ffc107"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/sure_name"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Address"
+            android:textColor="#ffc107"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/sure_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Pincode"
+            android:textColor="#ffc107"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginRight="5dp"/>
+
+        <TextView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/sure_pincode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+ />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Phone"
+            android:textColor="#ffc107"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/sure_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sure"
+            android:layout_marginRight="10dp"
+            android:id="@+id/sure_sure"
+            android:onClick="click_sure"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/sure_cancel"
+            android:onClick="click_sure"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+
+</ScrollView>
