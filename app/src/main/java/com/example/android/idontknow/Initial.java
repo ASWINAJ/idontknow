@@ -91,7 +91,6 @@ public class Initial extends AppCompatActivity implements NavigationView.OnNavig
         if(item.getItemId() == R.id.action_history){
             Intent i = new Intent(Initial.this,History.class);
             startActivity(i);
-            finish();
         }
 
         return true;

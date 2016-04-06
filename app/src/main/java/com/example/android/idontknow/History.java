@@ -98,7 +98,6 @@ public class History extends AppCompatActivity {
                         for(int i=0;i< response.length();i++){
                             try {
                                 JSONObject obj = response.getJSONObject(i);
-                                Toast.makeText(History.this,"bak"+obj.getString("custname"),Toast.LENGTH_SHORT).show();
 
                                 Transactions item = new Transactions();
                                 item.setThumbnailUrl(obj.getString("itemurl"));
@@ -108,6 +107,10 @@ public class History extends AppCompatActivity {
                                 item.setPincode(obj.getString("pin"));
                                 item.setItemname(obj.getString("itemname"));
                                 item.setAmount(obj.getString("kilos"));
+                                item.setNostars(obj.getInt("nostars"));
+                                item.setPhone(obj.getString("phone"));
+                                item.setTransId(obj.getString("transId"));
+                                item.setDateoftrans(obj.getString("date"));
 
 
                                 transactionsArrayList.add(item);

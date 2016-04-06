@@ -14,6 +14,33 @@ public class Transactions extends Item implements Serializable{
     private String City;
     private String phone;
     private String amount;
+    private int nostars;
+    private String transId;
+    private String dateoftrans;
+
+    public String getDateoftrans() {
+        return dateoftrans;
+    }
+
+    public void setDateoftrans(String dateoftrans) {
+        this.dateoftrans = dateoftrans;
+    }
+
+    public int getNostars() {
+        return nostars;
+    }
+
+    public void setTransId(String transId) {
+        this.transId = transId;
+    }
+
+    public String getTransId() {
+        return transId;
+    }
+
+    public void setNostars(int nostars) {
+        this.nostars = nostars;
+    }
 
     public void setName(String name) {
         this.name = name;

@@ -123,7 +123,7 @@ public class Sure extends AppCompatActivity {
                                 Toast.makeText(Sure.this, "Successfully entered", Toast.LENGTH_SHORT).show();
 
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(Sure.this);
-                                builder.setTitle("Request Recieved");
+                                builder.setTitle("Request Recieved"+transaction.getPhone());
                                 builder.setCancelable(false);
                                 builder.setMessage("Your transaction id is " + transId + "\nIt will be delivered within" +
                                         " 2 days from today.\nHappy to be a part of your happiness.\nThank you.");
