@@ -56,7 +56,7 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
     private Boolean aBoolean=false;
     private DrawerLayout drawerLayout;
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String url = "http://athena.nitc.ac.in/aswin_b130736cs/mine.json";
+    private static final String url = "http://athena.nitc.ac.in/aswin_b130736cs/getitems.php";
     private ArrayList<Item> Itemlist  = new ArrayList<Item>();
     private GridView listView;
     private CustomListAdapter adapter;
@@ -186,6 +186,8 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
                                 item.setItemname(obj.getString("title"));
                                 item.setThumbnailUrl(obj.getString("image"));
                                 item.setThumbnailUrl1(obj.getString("sub"));
+                                item.setPrice(obj.getString("price"));
+                                item.setRating(obj.getString("rating"));
 
                                 Itemlist.add(item);
 
@@ -220,7 +222,7 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
             }
         });
         int socketTimeout = 3000;
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, 0, 0);
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         itemreq.setRetryPolicy(policy);
 
         AppController.getInstance().addToRequestQueue(itemreq);

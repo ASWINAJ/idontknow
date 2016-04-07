@@ -10,6 +10,8 @@ public class Item implements Serializable {
     private String itemname;
     private String thumbnailUrl;
     private String thumbnailUrl1;
+    private String price;
+    private String rating;
 
     public Item(){
 
@@ -21,6 +23,22 @@ public class Item implements Serializable {
 
     public void setItemid(String itemid){
         this.itemid = itemid;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getRating() {
+        return rating;
     }
 
     public String getThumbnailUrl1() {

@@ -30,6 +30,7 @@
         android:fitsSystemWindows="true"
         android:id="@+id/sure_image"
         android:layout_gravity="center"
+        android:src="@drawable/image_300"
         />
 
     <LinearLayout

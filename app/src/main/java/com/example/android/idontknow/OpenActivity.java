@@ -1,5 +1,6 @@
 package com.example.android.idontknow;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,18 +22,32 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by aswin on 29/2/16.
  */
 public class OpenActivity extends AppCompatActivity implements Animation.AnimationListener {
-
+    private ProgressDialog progressDialog;
     private boolean aBoolean=false;
     private ImageView imageView;
     Animation myFadeInAnimation;
+    private String url ="http://athena.nitc.ac.in/aswin_b130736cs/check_internet.php";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +84,7 @@ public class OpenActivity extends AppCompatActivity implements Animation.Animati
                         HttpURLConnection urlc = (HttpURLConnection) (new URL("http://clients3.google.com/generate_204").openConnection());
                         urlc.setRequestProperty("User-Agent", "Test");
                         urlc.setRequestProperty("Connection", "close");
-                        urlc.setConnectTimeout(3500);
+                        urlc.setConnectTimeout(7000);
                         urlc.connect();
                         aBoolean = (urlc.getResponseCode() == 204 && urlc.getContentLength() == 0);
                     } catch (IOException e) {
@@ -85,9 +100,10 @@ public class OpenActivity extends AppCompatActivity implements Animation.Animati
 
     @Override
     public void onAnimationStart(Animation animation) {
-        action();
 
     }
+
+
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
@@ -105,14 +121,14 @@ public class OpenActivity extends AppCompatActivity implements Animation.Animati
 
         String a;
 
-        if(aBoolean == true)
+        if(isNetworkAvailable())
             a="network is true";
         else
             a="network is false";
 
         Toast.makeText(OpenActivity.this,a,Toast.LENGTH_SHORT).show();
 
-        if(aBoolean == false)
+        if(isNetworkAvailable()==false)
         {
             Intent i = new Intent(OpenActivity.this,Nointernet.class);
             startActivity(i);

@@ -40,7 +40,8 @@
         android:adjustViewBounds="true"
         android:fitsSystemWindows="true"
         android:scaleType="center"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:src="@drawable/image_300"/>
 
         <View
             android:layout_width="1dp"
@@ -56,7 +57,8 @@
             android:adjustViewBounds="true"
             android:fitsSystemWindows="true"
             android:scaleType="center"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:src="@drawable/image_300"/>
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -71,7 +73,8 @@
             android:adjustViewBounds="true"
             android:fitsSystemWindows="true"
             android:scaleType="center"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:src="@drawable/image_300"/>
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -86,7 +89,8 @@
             android:adjustViewBounds="true"
             android:fitsSystemWindows="true"
             android:scaleType="center"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:src="@drawable/image_300"/>
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -101,7 +105,8 @@
             android:id="@+id/main_image_5"
             android:adjustViewBounds="true"
             android:fitsSystemWindows="true"
-            android:scaleType="center"/>
+            android:scaleType="center"
+            android:src="@drawable/image_300"/>
 
     </LinearLayout>
     </HorizontalScrollView>

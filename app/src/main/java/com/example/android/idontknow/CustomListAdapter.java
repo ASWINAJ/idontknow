@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,8 @@ public class CustomListAdapter extends BaseAdapter{
         NetworkImageView thumbNail = (NetworkImageView) convertView
                 .findViewById(R.id.image);
         TextView itemname = (TextView) convertView.findViewById(R.id.itemname);
+        TextView price = (TextView)convertView.findViewById(R.id.price);
+        RatingBar ratingBar = (RatingBar)convertView.findViewById(R.id.rating);
 
 
         // getting movie data for the row
@@ -70,9 +73,11 @@ public class CustomListAdapter extends BaseAdapter{
         // thumbnail image
         thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 
+
         // title
         itemname.setText(m.getItemname());
-
+        price.setText("Rs." +m.getPrice() );
+        ratingBar.setRating(Float.parseFloat(m.getRating()));
 
         return convertView;
 

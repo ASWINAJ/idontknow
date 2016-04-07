@@ -100,7 +100,7 @@ public class History extends AppCompatActivity {
                                 JSONObject obj = response.getJSONObject(i);
 
                                 Transactions item = new Transactions();
-                                item.setThumbnailUrl(obj.getString("itemurl"));
+                                item.setThumbnailUrl(obj.getString("itemurl1"));
                                 item.setName(obj.getString("custname"));
                                 item.setAddress(obj.getString("address"));
                                 item.setCity(obj.getString("city"));
@@ -137,9 +137,9 @@ public class History extends AppCompatActivity {
                 else
                     Toast.makeText(History.this,error.toString(),Toast.LENGTH_SHORT).show();
 
-                // Intent i = new Intent(History.this,Nointernet.class);
-                // startActivity(i);
-                // finish();
+                 Intent i = new Intent(History.this,Nointernet.class);
+                 startActivity(i);
+                 finish();
             }
         }
 

@@ -16,11 +16,14 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -127,7 +130,7 @@ public class CustomHistory extends BaseAdapter {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    if (response.trim().equals("success")) {
+                                    if (response.trim().equals("successchanges")) {
 
                                         Toast.makeText(CustomHistory.this.activity, "Successfully entered", Toast.LENGTH_SHORT).show();
 
@@ -143,13 +146,13 @@ public class CustomHistory extends BaseAdapter {
                                 String err;
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    if(error instanceof NoConnectionError) {
+                                    if(error instanceof NoConnectionError ) {
                                         err = "No internet Access, Check your internet connection.";
                                         Toast.makeText(CustomHistory.this.activity,err,Toast.LENGTH_SHORT).show();
 
                                     }
-                                    else
-                                        Toast.makeText(CustomHistory.this.activity,"ERROR" + error.toString(),Toast.LENGTH_SHORT).show();
+                                    else if(error instanceof TimeoutError || error instanceof ServerError || error instanceof NetworkError || error instanceof AuthFailureError)
+                                        Toast.makeText(CustomHistory.this.activity,"Error in connecting..\nSorry for the delay.." + error.toString(),Toast.LENGTH_SHORT).show();
                                 }
                             })
                     {
