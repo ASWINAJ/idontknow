@@ -172,6 +172,7 @@ public class Cakes_list extends AppCompatActivity implements NavigationView.OnNa
         if(animation.equals(animation_1)) {
             Toast.makeText(Cakes_list.this, "this is the wedding" + a, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(Cakes_list.this,Wedding_cake.class);
+            i.putExtra("url","http://athena.nitc.ac.in/aswin_b130736cs/getitems.php");
             startActivity(i);
         }
         else if(animation.equals(animation_2)) {

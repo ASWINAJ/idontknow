@@ -23,10 +23,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by aswin on 1/4/16.
@@ -43,42 +55,45 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
     private Button click_to_check;
     private EditText pincode;
     private int pin;
-    private int avail=-1;
+    private int avail = -1;
     private Item item;
-
+    public String url = "http://athena.nitc.ac.in/aswin_b130736cs/to_cart.php";
+    public String from;
 
 
     private DrawerLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_item_initial);
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        add_to_cart = (Button)findViewById(R.id.add_to_cart);
+        add_to_cart = (Button) findViewById(R.id.add_to_cart);
         buy = (Button) findViewById(R.id.buy_button);
-        click_to_check = (Button)findViewById(R.id.check_availability);
-        pincode = (EditText)findViewById(R.id.pincode);
+        click_to_check = (Button) findViewById(R.id.check_availability);
+        pincode = (EditText) findViewById(R.id.pincode);
 
         buy.setBackgroundColor(ContextCompat.getColor(this, R.color.orange));
         add_to_cart.setBackgroundColor(ContextCompat.getColor(this, R.color.dark_white));
 
-        networkImageView1 = (NetworkImageView)findViewById(R.id.main_image_1);
-        networkImageView2 = (NetworkImageView)findViewById(R.id.main_image_2);
-        networkImageView3 = (NetworkImageView)findViewById(R.id.main_image_3);
-        networkImageView4 = (NetworkImageView)findViewById(R.id.main_image_4);
-        networkImageView5 = (NetworkImageView)findViewById(R.id.main_image_5);
+        networkImageView1 = (NetworkImageView) findViewById(R.id.main_image_1);
+        networkImageView2 = (NetworkImageView) findViewById(R.id.main_image_2);
+        networkImageView3 = (NetworkImageView) findViewById(R.id.main_image_3);
+        networkImageView4 = (NetworkImageView) findViewById(R.id.main_image_4);
+        networkImageView5 = (NetworkImageView) findViewById(R.id.main_image_5);
 
         Intent i = getIntent();
 
-        item = (Item)i.getExtras().getSerializable("MyClass");
-        Toast.makeText(Main_item.this,"asee "+item.getItemname(),Toast.LENGTH_SHORT).show();
+        from = i.getStringExtra("from");
+        item = (Item) i.getExtras().getSerializable("MyClass");
+        Toast.makeText(Main_item.this, "asee " + item.getItemname(), Toast.LENGTH_SHORT).show();
 
-       networkImageView1.setImageUrl(item.getThumbnailUrl1(), imageLoader);
-        networkImageView2.setImageUrl(item.getThumbnailUrl1(),imageLoader);
-        networkImageView3.setImageUrl(item.getThumbnailUrl1(),imageLoader);
-        networkImageView4.setImageUrl(item.getThumbnailUrl1(),imageLoader);
-        networkImageView5.setImageUrl(item.getThumbnailUrl1(),imageLoader);
+        networkImageView1.setImageUrl(item.getThumbnailUrl1(), imageLoader);
+        networkImageView2.setImageUrl(item.getThumbnailUrl1(), imageLoader);
+        networkImageView3.setImageUrl(item.getThumbnailUrl1(), imageLoader);
+        networkImageView4.setImageUrl(item.getThumbnailUrl1(), imageLoader);
+        networkImageView5.setImageUrl(item.getThumbnailUrl1(), imageLoader);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -88,7 +103,7 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.initial_toolbar);
-        if(toolbar!=null) {
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowHomeEnabled(false);
 
@@ -107,10 +122,24 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(Main_item.this,Wedding_cake.class);
-        startActivity(i);
-        finish();
+
+        if (from == null) {
+
+            Intent i = new Intent(Main_item.this, History.class);
+            startActivity(i);
+            finish();
+
+        } else {
+            Intent i = new Intent(Main_item.this, Wedding_cake.class);
+            i.putExtra("url", from);
+            startActivity(i);
+            finish();
+        }
     }
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -197,6 +226,57 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
                     startActivity(i);
 
             }
+        }
+        else if(view.getId() == R.id.add_to_cart){
+
+
+            StringRequest request = new StringRequest(Request.Method.POST,url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (response.trim().equals("success")) {
+
+                                Toast.makeText(Main_item.this, "Successfully entered", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(Main_item.this, "Incorrect Username or Password", Toast.LENGTH_SHORT).show();
+
+
+
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        String err;
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            if(error instanceof NoConnectionError) {
+                                err = "No internet Access, Check your internet connection.";
+                                Toast.makeText(Main_item.this,err,Toast.LENGTH_SHORT).show();
+
+                            }
+                            else
+                                Toast.makeText(Main_item.this,error.toString(),Toast.LENGTH_SHORT).show();
+                        }
+                    })
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> params = new HashMap<String,String>();
+                    params.put("custemail",SignUp.getUsername(Main_item.this));
+                    params.put("itemid",item.getItemid());
+                    return params;
+                }
+            };
+
+            int socketTimeout = 30000;
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            request.setRetryPolicy(policy);
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request);
+
+
         }
 
     }

@@ -127,8 +127,18 @@ public class Initial extends AppCompatActivity implements NavigationView.OnNavig
         }else if(view.getId() == R.id.party_button){
             Intent i = new Intent(Initial.this,Party_list.class);
             startActivity(i);
-            finish();
 
+
+        }else if(view.getId() == R.id.cart_button){
+            Intent i = new Intent(Initial.this,Wedding_cake.class);
+            i.putExtra("url","http://athena.nitc.ac.in/aswin_b130736cs/from_cart.php");
+            startActivity(i);
+
+
+        }else if(view.getId() == R.id.history_button){
+            Intent i = new Intent(Initial.this,History.class);
+            startActivity(i);
+            finish();
         }
 
     }

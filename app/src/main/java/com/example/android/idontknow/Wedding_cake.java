@@ -28,9 +28,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -48,7 +50,9 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by aswin on 31/3/16.
@@ -58,12 +62,14 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
     private Boolean aBoolean=false;
     private DrawerLayout drawerLayout;
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String url = "http://athena.nitc.ac.in/aswin_b130736cs/getitems.php";
+    private static String url ;
     private ArrayList<Item> Itemlist  = new ArrayList<Item>();
     private GridView listView;
     private CustomListAdapter adapter;
     private ProgressDialog progressDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
+    public static String u ;
+    //private Button item_remove;
 
 
     @Override
@@ -72,14 +78,32 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.wedding_cake_initial);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        Intent i = getIntent();
+        u = i.getStringExtra("url");
+        //item_remove = (Button)findViewById(R.id.item_remove);
+
+        /*if(item_remove==null)
+            Toast.makeText(Wedding_cake.this,"THIS IS SHIT",Toast.LENGTH_SHORT).show();
+*/
+        //if(u.equals("http://athena.nitc.ac.in/aswin_b130736cs/getitems.php"))
+           // item_remove.setVisibility(View.INVISIBLE);
+
+        url=u;
+        Toast.makeText(Wedding_cake.this,"this is the url" + u,Toast.LENGTH_SHORT).show();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading...");
 
+        int from;
+        if(url.equals("http://athena.nitc.ac.in/aswin_b130736cs/getitems.php"))
+            from = 0;
+        else
+            from = 1;
+
         listView = (GridView) findViewById(R.id.list);
-        adapter = new CustomListAdapter(this, Itemlist);
+        adapter = new CustomListAdapter(this, Itemlist,from);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -137,6 +161,10 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
         if(toolbar!=null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowHomeEnabled(false);
+            if(url.equals("http://athena.nitc.ac.in/aswin_b130736cs/from_cart.php"))
+            getSupportActionBar().setTitle("Cart");
+            else
+                getSupportActionBar().setTitle("Items");
 
         }
 
@@ -159,6 +187,7 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
                 Intent i = new Intent(Wedding_cake.this,Main_item.class);
                 Item obj = Itemlist.get(position);
                 i.putExtra("MyClass", (Serializable) obj);
+                i.putExtra("from",url);
                 startActivity(i);
                 finish();
             }
@@ -172,14 +201,16 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
         progressDialog.show();
 
 
-        Toast.makeText(Wedding_cake.this,"im in action",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Wedding_cake.this,"im in action" + SignUp.getUsername(Wedding_cake.this),Toast.LENGTH_SHORT).show();
 
-        JsonArrayRequest itemreq =new JsonArrayRequest(url,
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("email", SignUp.getUsername(Wedding_cake.this));
+
+        PostJsonArrayRequest itemreq =new PostJsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Itemlist.clear();
-                        //progressDialog.dismiss();
                         for(int i=0;i< response.length();i++){
                             try {
                                 JSONObject obj = response.getJSONObject(i);
@@ -207,6 +238,7 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
             @Override
             public void onErrorResponse(VolleyError error) {
                 String err;
+                Toast.makeText(Wedding_cake.this,"im not in nitd",Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 swipeRefreshLayout.setRefreshing(false);
                 if(error instanceof NoConnectionError) {
@@ -222,7 +254,8 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
                 finish();
             }
-        });
+        },params)
+        ;
         int socketTimeout = 3000;
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         itemreq.setRetryPolicy(policy);
@@ -250,10 +283,18 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
+        if (url.equals("http://athena.nitc.ac.in/aswin_b130736cs/getitems.php")) {
 
-        Intent i= new Intent(Wedding_cake.this,Cakes_list.class);
-        startActivity(i);
-        finish();
+            Intent i = new Intent(Wedding_cake.this, Cakes_list.class);
+            startActivity(i);
+            finish();
+        }else
+        {
+            Intent i = new Intent(Wedding_cake.this, Initial.class);
+            startActivity(i);
+            finish();
+
+        }
     }
 
     @Override

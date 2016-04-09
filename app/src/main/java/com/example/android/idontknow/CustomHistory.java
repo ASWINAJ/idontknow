@@ -99,7 +99,7 @@ public class CustomHistory extends BaseAdapter {
         Transactions m = transactionsArrayList.get(position);
 
         // thumbnail image
-        thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+        thumbNail.setImageUrl(m.getThumbnailUrl1(), imageLoader);
         //name.setText(m.getName());
         //address.setText(m.getAddress());
         //city.setText(m.getCity());

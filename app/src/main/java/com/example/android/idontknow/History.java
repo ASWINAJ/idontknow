@@ -11,8 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,6 +76,27 @@ public class History extends AppCompatActivity {
         }
 
         action();
+
+        listhistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(History.this, " " + position, Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(History.this, Main_item.class);
+                Transactions newtrans = transactionsArrayList.get(position);
+                Item object = new Item();
+                object.setItemid(newtrans.getItemid());
+                object.setItemname(newtrans.getItemname());
+                object.setRating(newtrans.getRating());
+                object.setPrice(newtrans.getPrice());
+                object.setThumbnailUrl(newtrans.getThumbnailUrl());
+                object.setThumbnailUrl1(newtrans.getThumbnailUrl1());
+                i.putExtra("MyClass", (Serializable) object);
+                startActivity(i);
+                finish();
+            }
+        });
+
     }
 
 
@@ -100,7 +124,7 @@ public class History extends AppCompatActivity {
                                 JSONObject obj = response.getJSONObject(i);
 
                                 Transactions item = new Transactions();
-                                item.setThumbnailUrl(obj.getString("itemurl1"));
+                                item.setThumbnailUrl(obj.getString("itemurl"));
                                 item.setName(obj.getString("custname"));
                                 item.setAddress(obj.getString("address"));
                                 item.setCity(obj.getString("city"));
@@ -111,6 +135,10 @@ public class History extends AppCompatActivity {
                                 item.setPhone(obj.getString("phone"));
                                 item.setTransId(obj.getString("transId"));
                                 item.setDateoftrans(obj.getString("date"));
+                                item.setItemid(obj.getString("itemId"));
+                                item.setThumbnailUrl1(obj.getString("itemurl1"));
+                                item.setPrice(obj.getString("price"));
+                                item.setRating("itemrating");
 
 
                                 transactionsArrayList.add(item);

@@ -205,6 +205,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="10"
                 android:src="@drawable/ic_shopping_cart_white_48dp"
+                android:id="@+id/cart_button"
                 />
 
             <View
@@ -233,6 +234,7 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/history_button"
                 android:background="#aeea00"
                 android:layout_gravity="center"
                 android:onClick="click"
