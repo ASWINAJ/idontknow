@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -103,6 +105,19 @@ public class OpenActivity extends AppCompatActivity implements Animation.Animati
 
     }
 
+    public static ProgressDialog createProgressDialog(Context mContext) {
+        ProgressDialog dialog = new ProgressDialog(mContext);
+        try {
+            dialog.show();
+        } catch (WindowManager.BadTokenException e) {
+
+        }
+        dialog.setCancelable(false);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.progressbar);
+        // dialog.setMessage(Message);
+        return dialog;
+    }
 
 
     private boolean isNetworkAvailable() {
@@ -114,50 +129,87 @@ public class OpenActivity extends AppCompatActivity implements Animation.Animati
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        String email = SignUp.getUsername(this);
-        String pass = SignUp.getKeyPass(this);
 
-        int fine = 0;
+        progressDialog = createProgressDialog(OpenActivity.this);
+        progressDialog.show();
+       // progressDialog.setIndeterminate(true);
+       // progressDialog.setCancelable(false);
 
-        String a;
+        StringRequest request = new StringRequest(Request.Method.POST,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        if (response.trim().equals("success")) {
 
-        if(isNetworkAvailable())
-            a="network is true";
-        else
-            a="network is false";
 
-        Toast.makeText(OpenActivity.this,a,Toast.LENGTH_SHORT).show();
+                            String email = SignUp.getUsername(OpenActivity.this);
+                            String pass = SignUp.getKeyPass(OpenActivity.this);
 
-        if(isNetworkAvailable()==false)
+                            int fine = 0;
+
+
+                                if ((email != null) && (pass != null)) {
+                                    fine = 1;
+                                }
+
+                                final Intent mainIntent = new Intent(OpenActivity.this, User.class);
+                                final Intent mainIntent2 = new Intent(OpenActivity.this, Initial.class);
+
+                                final int finalFine = fine;
+
+
+                                if (finalFine == 0)
+                                    startActivity(mainIntent);
+                                else
+                                    startActivity(mainIntent2);
+                                finish();
+
+                            }
+
+
+
+                            Toast.makeText(OpenActivity.this,"this is what i do",Toast.LENGTH_SHORT).show();
+
+
+
+                        }
+
+
+                },
+                new Response.ErrorListener() {
+                    String err;
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        if(error instanceof NoConnectionError) {
+                            err = "No internet Access, Check your internet connection.";
+                            Toast.makeText(OpenActivity.this,err,Toast.LENGTH_SHORT).show();
+
+                            Intent i = new Intent(OpenActivity.this,Nointernet.class);
+                            startActivity(i);
+                            finish();
+
+                        }
+                        else
+                            Toast.makeText(OpenActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                })
         {
-            Intent i = new Intent(OpenActivity.this,Nointernet.class);
-            startActivity(i);
-            finish();
-        }
-        else {
-
-
-            if ((email != null) && (pass != null)) {
-                fine = 1;
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("email","check");
+                return params;
             }
+        };
 
-            final Intent mainIntent = new Intent(OpenActivity.this, User.class);
-            final Intent mainIntent2 = new Intent(OpenActivity.this, Initial.class);
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
 
-            final int finalFine = fine;
-
-
-            if (finalFine == 0)
-                startActivity(mainIntent);
-            else
-                startActivity(mainIntent2);
-            finish();
-
-        }
-
-
-
-        Toast.makeText(OpenActivity.this,"this is what i do",Toast.LENGTH_SHORT).show();
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
     }
 
     @Override

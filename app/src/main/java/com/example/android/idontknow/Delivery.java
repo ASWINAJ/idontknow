@@ -192,6 +192,11 @@ public class Delivery extends AppCompatActivity implements NumberPicker.OnValueC
         if(item.getItemId() == android.R.id.home)
             onBackPressed();
 
+        if(item.getItemId() == R.id.action_history){
+            Intent i = new Intent(Delivery.this,History.class);
+            startActivity(i);
+        }
+
         Toast.makeText(Delivery.this,item.getTitle(),Toast.LENGTH_SHORT).show();
 
         return true;

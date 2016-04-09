@@ -82,7 +82,7 @@
         <activity android:name=".Delivery"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="Delivery Details"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustResize|stateVisible"></activity>
         <activity android:name=".Sure"
             android:theme="@style/AppTheme.NoActionBar"
             android:label="Sure?"

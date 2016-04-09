@@ -20,6 +20,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -229,7 +231,21 @@ public class Wedding_cake extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_history){
+            Intent i = new Intent(Wedding_cake.this,History.class);
+            startActivity(i);
+        }
+        return true;
+    }
 
     @Override
     public void onBackPressed() {

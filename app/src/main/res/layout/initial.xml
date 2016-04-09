@@ -1,63 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#4527a0"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="12dp"
+    android:background="#424242"
     >
 
+    <LinearLayout
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="start"
-        android:layout_margin="10dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+
         >
 
-        <ImageButton
+        <LinearLayout
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
+            android:background="#d84315"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+        <ImageButton
+            android:background="#d84315"
+            android:layout_gravity="center"
+            android:onClick="click"
             android:id="@+id/cakes_button"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:src="@drawable/rsz_3large_3tieredbirthdaycake"
-            android:background="@drawable/rounded_corner"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="?android:actionBarSize"
-            android:layout_gravity="center"
-            android:onClick="click"
-
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:src="@drawable/birthday_cake"
             />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#212121"
+                ></View>
+
+            <TextView
+                android:textColor="#ffffff"
+                android:fontFamily="sans-serif-medium"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="Cakes"
+                android:textSize="16sp"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#0091ea">
+
+            <ImageButton
+                android:background="#0091ea"
+                android:layout_gravity="center"
+                android:onClick="click"
+                android:id="@+id/muffins_button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:src="@drawable/third"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#212121"
+                ></View>
+
+            <TextView
+                android:fontFamily="sans-serif-medium"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="Muffins"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+>
+        <LinearLayout
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="12dp"
+            android:background="#ab47bc"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageButton
-
-            android:id="@+id/muffins_button"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:src="@drawable/rsz_muffins"
-            android:background="@drawable/rounded_corner"
-            android:padding="5dp"
-            android:layout_margin="10dp"
+            android:background="#ab47bc"
             android:layout_gravity="center"
             android:onClick="click"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:src="@drawable/rsz_ob"
             />
 
-        <ImageButton
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#212121"
+                ></View>
 
-            android:id="@+id/party_button"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:src="@drawable/rsz_large"
-            android:background="@drawable/rounded_corner"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:onClick="click"
-            />
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:text="Lets Party"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="12dp"
+            android:background="#7cb342"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:background="#7cb342"
+                android:layout_gravity="center"
+                android:onClick="click"
+                android:id="@+id/party_button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:src="@drawable/rsz_clock"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#212121"
+
+                ></View>
+            <TextView
+                android:fontFamily="sans-serif-medium"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="Extras"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
 
 
 
     </LinearLayout>
-</ScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+     >
+
+        <LinearLayout
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="12dp"
+            android:background="#ff9800"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:background="#ff9800"
+                android:layout_gravity="center"
+                android:onClick="click"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:src="@drawable/rsz_cart"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#212121"></View>
+
+            <TextView
+                android:fontFamily="sans-serif-medium"
+                android:textColor="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="Cart"
+                android:textSize="16sp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="12dp"
+            android:background="#aeea00"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:background="#aeea00"
+                android:layout_gravity="center"
+                android:onClick="click"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:src="@drawable/ic_history"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#212121"></View>
+
+            <TextView
+                android:fontFamily="sans-serif-medium"
+                android:textColor="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="History"
+                android:textSize="16sp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>

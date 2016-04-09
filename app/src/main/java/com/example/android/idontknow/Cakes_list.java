@@ -194,6 +194,15 @@ public class Cakes_list extends AppCompatActivity implements NavigationView.OnNa
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_history){
+            Intent i = new Intent(Cakes_list.this,History.class);
+            startActivity(i);
+        }
+            return true;
+    }
+
 
     @Override
     public void onAnimationRepeat(Animation animation) {

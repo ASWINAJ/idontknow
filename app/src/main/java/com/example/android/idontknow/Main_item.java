@@ -1,5 +1,6 @@
 package com.example.android.idontknow;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -127,6 +129,11 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
             startActivity(i);
         }
 
+        if(item.getItemId() == R.id.action_history){
+            Intent i = new Intent(Main_item.this,History.class);
+            startActivity(i);
+        }
+
         return true;
     }
 
@@ -148,6 +155,10 @@ public class Main_item extends AppCompatActivity implements NavigationView.OnNav
     public void click_check_avail(View view){
 
         if(view.getId()==R.id.check_availability){
+
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
             String pinc;
             pinc = pincode.getText().toString().trim();
             if(pinc.isEmpty())

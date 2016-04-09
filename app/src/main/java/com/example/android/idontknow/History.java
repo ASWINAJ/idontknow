@@ -170,6 +170,10 @@ public class History extends AppCompatActivity {
             onBackPressed();
         }
 
+        if(item.getItemId() == R.id.action_history){
+            Intent i = new Intent(History.this,History.class);
+            startActivity(i);
+        }
         return true;
     }
 }
