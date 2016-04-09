@@ -104,7 +104,7 @@ public class CustomHistory extends BaseAdapter {
         //address.setText(m.getAddress());
         //city.setText(m.getCity());
         //pincode.setText(m.getPincode());
-        price.setText("250.00");
+        price.setText("Rs."+m.getPrice());
         amount.setText(m.getAmount());
         ratingBar.setRating((float)(m.getNostars()));
         ratingBar.setEnabled(true);
