@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:src="@drawable/birthday_cake"
+            android:src="@drawable/ic_cake_white_48dp"
             />
 
             <View
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:src="@drawable/third"
+                android:src="@drawable/rsz_imageinwhite"
                 />
 
             <View
@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:src="@drawable/rsz_ob"
+            android:src="@drawable/ic_library_music_white_48dp"
             />
 
             <View
@@ -154,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:src="@drawable/rsz_clock"
+                android:src="@drawable/ic_shopping_basket_white_48dp"
                 />
 
             <View
@@ -204,7 +204,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:src="@drawable/rsz_cart"
+                android:src="@drawable/ic_shopping_cart_white_48dp"
                 />
 
             <View
@@ -239,7 +239,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:src="@drawable/ic_history"
+                android:src="@drawable/ic_home_black_24dp"
                 />
 
             <View
